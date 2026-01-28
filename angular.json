@@ -61,6 +61,7 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
+              "proxyConfig": "src/proxy.conf.json",
               "buildTarget": "grocy-receipt-scanner-fe:build:production"
             },
             "development": {

@@ -1,0 +1,98 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.scanner-card {
+  width: 100%;
+  max-width: 900px;
+}
+
+.upload-area {
+  padding: 30px 0;
+  text-align: center;
+
+  input {
+    display: none;
+  }
+}
+
+.table-container {
+  overflow-x: auto; // Scrollbar auf kleinen Handys
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  min-width: 600px; // Erzwingt Scrollen wenn zu klein
+}
+
+// Spaltenbreiten optimieren
+.mat-column-name { width: 30%; }
+.mat-column-match { width: 35%; }
+.mat-column-amount { width: 15%; }
+.mat-column-price { width: 20%; }
+
+.product-name {
+  display: block;
+  font-weight: 500;
+}
+
+.match-info {
+  font-size: 0.75rem;
+  color: green;
+
+  &.new {
+    color: orange;
+    font-weight: bold;
+  }
+}
+
+// Material Inputs kompakter machen
+.dense-form-field {
+  width: 100%;
+  font-size: 14px;
+}
+
+.small-input {
+  width: 70px;
+  font-size: 14px;
+}
+
+// Material Overrides für kompaktere Tabelle
+tr.mat-mdc-row {
+  height: 60px;
+
+  .mat-column-name {
+    width: 25%;      /* Vorher 30% - Namen können ruhig umbrechen */
+  }
+
+  .mat-column-match {
+    width: 35%;
+  }
+
+  .mat-column-amount {
+    width: 15%;
+    min-width: 60px; /* Sicherstellen, dass Menge nicht verschwindet */
+  }
+
+  .mat-column-price {
+    width: 25%;       /* Vorher 20% - Mehr Platz für den Preis! */
+    min-width: 90px;  /* WICHTIG: Mindestbreite, damit "12.99" immer passt */
+    text-align: right; /* Sieht bei Zahlen besser aus */
+  }
+}
+
+.small-input {
+  width: 100%;      /* Soll den Platz der Spalte ausfüllen */
+  max-width: 80px;  /* Aber nicht riesig werden */
+  font-size: 14px;
+
+  // Optional: Damit die Zahl im Input rechts steht (wie bei Excel)
+  input {
+    text-align: right;
+  }
+}

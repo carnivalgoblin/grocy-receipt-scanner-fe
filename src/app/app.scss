@@ -1,98 +1,265 @@
-.container {
+// Variables
+$header-height: 64px;
+$max-width: 1000px;
+
+:host {
+  display: block;
+  min-height: 100vh;
+  // Use a slightly darker background for the page to make the white card pop
+  background-color: var(--mat-sys-surface-container);
+}
+
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--mat-sys-surface-container);
+  
+  mat-icon {
+    margin-right: 12px;
+  }
+  
+  span {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+}
+
+.main-content {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+// Upload Section
+.upload-section {
+  transition: all 0.3s ease;
+  
+  &.compact {
+    .upload-dropzone {
+      padding: 16px;
+      flex-direction: row;
+      justify-content: center;
+      gap: 16px;
+      min-height: auto;
+      
+      .large-icon {
+        font-size: 24px;
+        height: 24px;
+        width: 24px;
+        margin-bottom: 0;
+      }
+      
+      h3 {
+        margin: 0;
+        font-size: 1rem;
+      }
+      
+      p {
+        display: none;
+      }
+    }
+  }
+}
+
+.upload-dropzone {
+  // Use a distinct surface color for the dropzone
+  background-color: var(--mat-sys-surface);
+  border: 2px dashed var(--mat-sys-outline-variant);
+  border-radius: 16px;
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    background-color: var(--mat-sys-surface-container-high);
+    border-color: var(--mat-sys-primary);
+  }
+
+  &.loading {
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  .large-icon {
+    font-size: 64px;
+    height: 64px;
+    width: 64px;
+    margin-bottom: 16px;
+    color: var(--mat-sys-primary);
+  }
+
+  h3 {
+    margin: 0 0 8px;
+    font-weight: 500;
+    color: var(--mat-sys-on-surface);
+  }
+
+  p {
+    margin: 0;
+    color: var(--mat-sys-on-surface-variant);
+  }
+  
+  .loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+// Shop Header
+.shop-header {
   display: flex;
   justify-content: center;
-  padding: 20px;
-  background-color: #f5f5f5;
-  min-height: 100vh;
+  margin-bottom: 16px;
+  
+  .shop-badge {
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
+    padding: 8px 16px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
 }
 
-.scanner-card {
+// Results Card
+.results-card {
+  overflow: hidden;
+  border-radius: 12px;
+  // Ensure the card has a plain background (usually white in light mode)
+  background-color: var(--mat-sys-surface);
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .action-buttons {
+    padding: 16px;
+    background-color: var(--mat-sys-surface-container-low);
+    border-top: 1px solid var(--mat-sys-outline-variant);
+  }
+}
+
+// Table Styles
+table {
   width: 100%;
-  max-width: 900px;
+  min-width: 650px; 
+
+  // Make header stand out
+  thead tr {
+    background-color: var(--mat-sys-surface-container-low);
+    
+    th {
+      font-weight: 600;
+      color: var(--mat-sys-on-surface);
+    }
+  }
+
+  // Row styles
+  tbody tr {
+    transition: background-color 0.2s;
+    
+    // Separator line
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
+
+    &:hover {
+      background-color: var(--mat-sys-surface-container-highest);
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 }
 
-.upload-area {
-  padding: 30px 0;
-  text-align: center;
+.product-cell {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  
+  .product-name {
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--mat-sys-on-surface);
+  }
+  
+  .match-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 6px;
+    background-color: var(--mat-sys-secondary-container);
+    color: var(--mat-sys-on-secondary-container);
+    border-radius: 4px;
+    width: fit-content;
+    margin-top: 4px;
+    
+    &.new {
+      background-color: var(--mat-sys-tertiary-container);
+      color: var(--mat-sys-on-tertiary-container);
+    }
+  }
+}
 
-  input {
+// Column Widths & Layout
+.mat-column-name { width: 35%; }
+.mat-column-match { width: 30%; }
+.mat-column-amount { width: 15%; }
+.mat-column-price { width: 20%; text-align: right; }
+
+// Input Styles
+.dense-form-field {
+  width: 100%;
+  font-size: 14px;
+  
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
     display: none;
   }
 }
 
-.table-container {
-  overflow-x: auto; // Scrollbar auf kleinen Handys
-  margin-top: 20px;
-}
-
-table {
-  width: 100%;
-  min-width: 600px; // Erzwingt Scrollen wenn zu klein
-}
-
-// Spaltenbreiten optimieren
-.mat-column-name { width: 30%; }
-.mat-column-match { width: 35%; }
-.mat-column-amount { width: 15%; }
-.mat-column-price { width: 20%; }
-
-.product-name {
-  display: block;
-  font-weight: 500;
-}
-
-.match-info {
-  font-size: 0.75rem;
-  color: green;
-
-  &.new {
-    color: orange;
-    font-weight: bold;
-  }
-}
-
-// Material Inputs kompakter machen
-.dense-form-field {
+.small-input {
   width: 100%;
   font-size: 14px;
-}
-
-.small-input {
-  width: 70px;
-  font-size: 14px;
-}
-
-// Material Overrides für kompaktere Tabelle
-tr.mat-mdc-row {
-  height: 60px;
-
-  .mat-column-name {
-    width: 25%;      /* Vorher 30% - Namen können ruhig umbrechen */
-  }
-
-  .mat-column-match {
-    width: 35%;
-  }
-
-  .mat-column-amount {
-    width: 15%;
-    min-width: 60px; /* Sicherstellen, dass Menge nicht verschwindet */
-  }
-
-  .mat-column-price {
-    width: 25%;       /* Vorher 20% - Mehr Platz für den Preis! */
-    min-width: 90px;  /* WICHTIG: Mindestbreite, damit "12.99" immer passt */
-    text-align: right; /* Sieht bei Zahlen besser aus */
+  
+  &.centered-input input { text-align: center; }
+  &.right-align-input input { text-align: right; }
+  
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none;
   }
 }
 
-.small-input {
-  width: 100%;      /* Soll den Platz der Spalte ausfüllen */
-  max-width: 80px;  /* Aber nicht riesig werden */
-  font-size: 14px;
+.ignore-option {
+  color: var(--mat-sys-on-surface-variant);
+  font-style: italic;
+}
 
-  // Optional: Damit die Zahl im Input rechts steht (wie bei Excel)
-  input {
-    text-align: right;
+// Mobile Adjustments
+@media (max-width: 600px) {
+  .main-content {
+    padding: 16px 8px;
+  }
+  
+  .mat-column-name { width: 30%; }
+  .mat-column-match { width: 35%; }
+  .mat-column-amount { width: 15%; min-width: 60px; }
+  .mat-column-price { width: 20%; min-width: 80px; }
+  
+  .upload-dropzone {
+    padding: 32px 16px;
   }
 }

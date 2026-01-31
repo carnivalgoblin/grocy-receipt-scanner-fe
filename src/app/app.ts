@@ -10,7 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import {GrocyProduct, ScannedItem, ScanService} from './services/scan-service';
 
 @Component({
@@ -20,7 +22,8 @@ import {GrocyProduct, ScannedItem, ScanService} from './services/scan-service';
     CommonModule,
     FormsModule,
     MatCardModule, MatButtonModule, MatTableModule, MatInputModule,
-    MatSelectModule, MatIconModule, MatProgressBarModule, MatSnackBarModule
+    MatSelectModule, MatIconModule, MatProgressBarModule, MatSnackBarModule,
+    MatToolbarModule, MatProgressSpinnerModule
   ],
   templateUrl: './app.html',   // <--- Deine Datei heißt app.html
   styleUrl: './app.scss'       // <--- Deine Datei heißt app.scss
